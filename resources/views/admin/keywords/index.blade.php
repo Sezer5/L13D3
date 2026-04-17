@@ -13,9 +13,9 @@
                                 <thead>
                                     <tr>
                                         <td colspan="5" class="text-end">
-                                            <a href="{{route('admin.category.create')}}">
+                                            <a href="{{route('admin.keywords.create')}}">
                                                 <button class="btn btn-success">
-                                                    <i class="bi bi-plus"></i> Add Category
+                                                    <i class="bi bi-plus"></i> Add keywords
                                                 </button>
                                             </a>
                                         </td>
@@ -29,21 +29,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $key => $category)
+                                    @foreach ($keywords as $key => $keywords)
                                         <tr>
                                             <td>{{ $key += 1 }}</td>
-                                            <td>{{$category->name}}</td>
-                                            <td>{{$category->slug}}</td>
+                                            <td>{{$keywords->name}}</td>
+                                            <td>{{$keywords->slug}}</td>
                                             <td>
-                                                <a href="{{route('admin.category.edit',$category->slug)}}">
+                                                <a href="{{route('admin.keywords.edit',$keywords->slug)}}">
                                                     <button class="btn btn-warning"><i class="bi bi-pencil"></i></button>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="#" onclick="deleteItem({{$category->id}})" class="btn btn-danger">
+                                                <a href="#" onclick="deleteItem({{$keywords->id}})" class="btn btn-danger">
                                                     <i class="bi bi-trash"></i>
                                                 </a>
-                                                <form id="{{$category->id}}" action="{{route('admin.category.destroy',$category->slug)}}" method="post">
+                                                <form id="{{$keywords->id}}" action="{{route('admin.keywords.destroy',$keywords->slug)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
