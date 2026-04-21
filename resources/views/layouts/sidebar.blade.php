@@ -8,8 +8,8 @@
         <ul class="nav flex-column">
             <li class="nav-item"><a href="{{route('admin.category.index')}}" class="nav-link active"><i class="bi bi-speedometer2 me-2"></i> Categories</a></li>
             <li class="nav-item"><a href="{{route('admin.keyword.index')}}" class="nav-link"><i class="bi bi-key me-2"></i> Keywords</a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-people me-2"></i> Kullanıcılar</a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-gear me-2"></i> Ayarlar</a></li>
+            <li class="nav-item"><a href="{{route('admin.article.index')}}" class="nav-link"><i class="bi bi-files me-2"></i> Articles</a></li>
+            
         </ul>
     </nav>
 

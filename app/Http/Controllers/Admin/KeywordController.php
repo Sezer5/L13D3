@@ -17,7 +17,7 @@ class KeywordController extends Controller
     public function index()
     {
         return view('admin.keyword.index')->with([
-            "categories" => Keyword::all()
+            "keywords" => Keyword::all()
         ]);
     }
 

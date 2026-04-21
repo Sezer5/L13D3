@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\KeywordController;
 use Illuminate\Support\Facades\Route;
@@ -17,4 +18,5 @@ Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function
 
     Route::resource('category',CategoryController::class);
     Route::resource('keyword',KeywordController::class);
+    Route::resource('article',ArticleController::class);
 });
