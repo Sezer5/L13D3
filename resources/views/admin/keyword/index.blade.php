@@ -27,7 +27,7 @@
                                         <th>Slug</th>
                                         <th>#</th>
                                     </tr>
-                                    @foreach ($articles as $key => $article)
+                                    @foreach ($keywords as $key => $keyword)
                                         <tr>
                                             <td>{{$key+=1}}</td>
                                             <td>{{$keyword->name}}</td>
