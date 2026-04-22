@@ -9,6 +9,7 @@
             <li class="nav-item"><a href="{{route('admin.category.index')}}" class="nav-link active"><i class="bi bi-speedometer2 me-2"></i> Categories</a></li>
             <li class="nav-item"><a href="{{route('admin.keyword.index')}}" class="nav-link"><i class="bi bi-key me-2"></i> Keywords</a></li>
             <li class="nav-item"><a href="{{route('admin.article.index')}}" class="nav-link"><i class="bi bi-files me-2"></i> Articles</a></li>
+            <li class="nav-item"><a href="{{route('admin.gallery.index')}}" class="nav-link"><i class="bi bi-images me-2"></i> Galleries</a></li>
             
         </ul>
     </nav>
