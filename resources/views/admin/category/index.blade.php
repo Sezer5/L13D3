@@ -1,60 +1,62 @@
-@extends('layouts.adminlayout')
+    @extends('layouts.adminlayout')
     @section('title')
-        Home
+        Categories
     @endsection
     @section('content')
          <main class="p-4">
             <div class="container-fluid">
-                <h2 class="mb-4 fw-bold" style="color: var(--dark-color);">Kontrol Paneli</h2>
+                <h2 class="mb-4 fw-bold" style="color: var(--dark-color);">Categories</h2>
+
                 <div class="row">
-                    <div class="card card-body">
-                        <div class="col-md-6">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
+                    <div class="col-md-12 mb-4">
+                        <div class="card card-body p-3">
+                            <div class="col-md-4">
+                                <table class="table table-bordered table-striped table-responsive">
                                     <tr>
-                                        <td colspan="5" class="text-end">
+                                        <th colspan="5" class="text-end">
                                             <a href="{{route('admin.category.create')}}">
-                                                <button class="btn btn-success">
-                                                    <i class="bi bi-plus"></i> Add Category
+                                                <button class="btn btn-success btn-sm">
+                                                    <i class="bi bi-plus"></i>
                                                 </button>
                                             </a>
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <th>*</th>
                                         <th>Name</th>
                                         <th>Slug</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <th>#</th>
                                     </tr>
-                                </thead>
-                                <tbody>
                                     @foreach ($categories as $key => $category)
                                         <tr>
-                                            <td>{{ $key += 1 }}</td>
+                                            <td>{{$key+=1}}</td>
                                             <td>{{$category->name}}</td>
                                             <td>{{$category->slug}}</td>
                                             <td>
                                                 <a href="{{route('admin.category.edit',$category->slug)}}">
-                                                    <button class="btn btn-warning"><i class="bi bi-pencil"></i></button>
+                                                    <button class="btn btn-sm btn-warning">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
                                                 </a>
-                                            </td>
-                                            <td>
-                                                <a href="#" onclick="deleteItem({{$category->id}})" class="btn btn-danger">
-                                                    <i class="bi bi-trash"></i>
+                                                <a href="#"  onclick="deleteItem({{$category->id}})"> 
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </a>
-                                                <form id="{{$category->id}}" action="{{route('admin.category.destroy',$category->slug)}}" method="post">
+                                                <form id="{{$category->id}}" action="{{route('admin.category.destroy',$category->slug)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
                                             </td>
                                         </tr>
                                     @endforeach
-                                    
-                                </tbody>
-                            </table>
+                                </table>
+                            </div>
+                            
+                            
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </main>

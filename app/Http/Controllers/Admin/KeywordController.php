@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
-use App\Models\Category;
+use App\Http\Requests\AddKeywordRequest;
+use App\Http\Requests\UpdateKeywordRequest;
+use App\Models\Keyword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class KeywordController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.category.index')->with([
-            "categories" => Category::all()
+        return view('admin.keyword.index')->with([
+            "keywords" => Keyword::all()
         ]);
     }
 
@@ -26,20 +26,20 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.keyword.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AddCategoryRequest $request)
+    public function store(AddKeywordRequest $request)
     {
         if($request->validated()){
             $data=$request->validated();
             $data['slug']=Str::slug($request->name);
-            Category::create($data);
-            return redirect()->route('admin.category.index')->with([
-                "success" => "Category $request->name created successfully"
+            Keyword::create($data);
+            return redirect()->route('admin.keyword.index')->with([
+                "success" => "keyword $request->name created successfully"
             ]);
         }
     }
@@ -55,24 +55,24 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Keyword $keyword)
     {
-        return view('admin.category.edit')->with([
-            "category" => $category
+        return view('admin.keyword.edit')->with([
+            "keyword" => $keyword
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateKeywordRequest $request, Keyword $keyword)
     {
         if($request->validated()){
             $data = $request->validated();
             $data['slug'] = Str::slug($request->name);
-            $category->update($data);
-            return redirect()->route('admin.category.index')->with([
-                "success" => "Category $request->name updated successfully"
+            $keyword->update($data);
+            return redirect()->route('admin.keyword.index')->with([
+                "success" => "Keyword $request->name updated successfully"
             ]);
         }
     }
@@ -80,11 +80,11 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Keyword $keyword)
     {
-        $category->delete();
-        return redirect()->route('admin.category.index')->with([
-            "success" => "Category deleted successfully"
+        $keyword->delete();
+        return redirect()->route('admin.keyword.index')->with([
+            "success" => "Keyword deleted successfully"
         ]);
     }
 }

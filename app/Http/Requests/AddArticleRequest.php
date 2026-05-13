@@ -23,19 +23,21 @@ class AddArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:255|unique:articles',
+            'title' => 'required|min:1|unique:articles',
             'desc' => 'required|max:5000',
+            'category_id' => 'required',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048'
         ];
     }
 
     public function messages()
     {
-        return[
-            'title.required' => 'The title field is required',
-            'desc.max' => 'The description field is not must be greater than : max characters',
-            'thumbnail.max' => 'The thumbnail must not be greater than 2MB',
-            'thumbnail.image' => 'The thumbnail must be an image',
+        return [
+            'title.required' => 'Title field is required',
+            'desc.required' => 'Description field is required',
+            'category_id.required' => 'Category field is required',
+            'thumbnail.max' => 'The thumbnail must not greater than 2MB',
+            'thumbnail.image' => 'The thumbnail must be an image'
         ];
     }
 }

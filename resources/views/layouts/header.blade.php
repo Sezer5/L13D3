@@ -9,7 +9,7 @@
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="userMenu" data-bs-toggle="dropdown">
                             <img src="https://ui-avatars.com/api/?name=Admin&background=40b27f&color=fff" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-                            <span class="d-none d-sm-inline text-muted">Hoş geldin, <strong>{{Auth::user()->name}}</strong></span>
+                            <span class="d-none d-sm-inline text-muted">Hoş geldin, <strong>Yönetici</strong></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                             <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profil</a></li>

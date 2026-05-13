@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddArticleRequest;
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\Keyword;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -13,9 +16,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
         return view('admin.article.index')->with([
-            "articles" => $articles
+            "articles" => Article::with(['category','keywords'])->latest()->get()
         ]);
     }
 
@@ -24,15 +26,31 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.article.create');
+        return view('admin.article.create')->with([
+            "categories" => Category::all(),
+            "keywords" => Keyword::all(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddArticleRequest $request)
     {
-        //
+        if($request->validated()){
+            $data = $request->validated();
+
+            if($request->has('thumbnail')){
+                $data['thumbnail'] = $this->saveImage($request->file('thumbnail'));
+            }
+
+            $article = Article::create($data);
+            $article->keywords()->sync($request->keyword_id);
+
+            return redirect()->route('admin.article.index')->with([
+                "success" => "Article $request->title created successfully!"
+            ]);
+        }
     }
 
     /**
@@ -65,5 +83,11 @@ class ArticleController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function saveImage($file){
+        $image_name = time().'_'.$file->getClientOriginalName();
+        $file->storeAs('images/articles',$image_name,'public');
+        return 'storage/images/articles/'.$image_name;
     }
 }

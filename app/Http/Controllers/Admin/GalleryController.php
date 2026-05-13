@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AuthAdminRequest;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.index');
+        return view('admin.gallery.index')->with([
+            "galleries" => Gallery::all()
+        ]);
     }
 
     /**
@@ -22,7 +23,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.gallery.create');
     }
 
     /**
@@ -30,7 +31,12 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        if($request->has('mainphoto')){
+            $data['mainphoto'] = $this->saveImage($request->file('mainphoto'));
+        }
+        Gallery::create($data);
+        return redirect()->route('admin.gallery.index');
     }
 
     /**
@@ -65,27 +71,9 @@ class AdminController extends Controller
         //
     }
 
-    public function login(){
-        return view('admin.login');
-    }
-
-    public function auth(AuthAdminRequest $request){
-        if($request->validated()){
-            $credentials = $request->validated();
-            if(Auth::attempt($credentials)){
-                $request->session()->regenerate();
-            }
-            if(Auth::check() && Auth::user()->hasRole('admin')){
-                return redirect()->route('admin.home');
-            }else{
-                Auth::logout();
-                return redirect()->route('admin.login');
-            }
-        }
-    }
-
-    public function logout(){
-        Auth::logout();
-        return redirect()->route('admin.login');
+    public function saveImage($file){
+        $image_name=time().'_'.$file->getClientOriginalName();
+        $file->storeAs('images/articles',$image_name,'public');
+        return 'storage/images/articles/'.$image_name;
     }
 }

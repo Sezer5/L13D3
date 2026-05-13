@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthAdminRequest extends FormRequest
+class AddKeywordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class AuthAdminRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'email' => 'required|min:5',
-            'password' => 'required|min:6'
+         return [
+            'name' => 'required|max:255|unique:keywords'
         ];
     }
 }
